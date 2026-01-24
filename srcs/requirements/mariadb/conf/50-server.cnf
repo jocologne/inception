@@ -1,0 +1,33 @@
+[mysqld]
+datadir                 = /var/lib/mysql
+socket                  = /var/run/mysqld/mysqld.sock
+bind-address            = 0.0.0.0
+port                    = 3306
+user                    = mysql
+character-set-server    = utf8mb4
+collation-server        = utf8mb4_unicode_ci
+
+# Improves performance by avoiding DNS lookups
+skip-name-resolve
+max_connections         = 100
+connect_timeout         = 10
+wait_timeout            = 600
+max_allowed_packet      = 64M
+
+innodb_buffer_pool_size = 128M
+innodb_log_file_size    = 48M
+innodb_file_per_table   = 1
+
+log_error               = /var/lib/mysql/error.log
+slow_query_log          = 0
+
+# Query cache is deprecated in modern MariaDB/MySQL
+query_cache_type        = 0
+query_cache_size        = 0
+
+[client]
+socket                  = /var/run/mysqld/mysqld.sock
+default-character-set   = utf8mb4
+
+[mysql]
+default-character-set   = utf8mb4
