@@ -1,0 +1,45 @@
+services:
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    container_name: mariadb
+    image: mariadb
+    restart:  unless-stopped
+    networks:
+      - inception
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+      - db_root_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", ping, "-h", "localhost", "--silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+
+    
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jcologne/data/mariadb
+
+networks:
+  inception:
+    driver: bridge
