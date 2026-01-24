@@ -1,0 +1,34 @@
+# NEVER commit real secrets!
+# secrets/db_password.txt
+# secrets/db_root_password.txt
+# secrets/credentials.txt
+
+/home/*/data/
+
+# srcs/.env
+
+.DS_Store
+Thumbs.db
+
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-*
+
+*.log
+logs/
+
+*.tmp
+*.temp
+
+*.tar
+*.gz
+
+*.pem
+*.key
+*.crt
+*.csr
+
+core

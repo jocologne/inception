@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# Docs
+*.md
+README*
+LICENSE
+
+# Temp files
+*.log
+*.tmp
+*.swp
+*~
+*.bak
+*.backup
+
+# Host data volumes
+data/
+
+# Secrets (CRÍTICO)
+secrets/
+*.env
