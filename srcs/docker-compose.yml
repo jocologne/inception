@@ -1,7 +1,7 @@
 services:
   wordpress:
     build:
-      context: .requirements/wordpress 
+      context: ./requirements/wordpress 
       dockerfile: Dockerfile
     container_name: wordpress
     image: wordpress
