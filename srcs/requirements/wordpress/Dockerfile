@@ -9,7 +9,6 @@ RUN	apt-get update && apt-get install -y --no-install-recommends \
 		php-mbstring \
 		php-xml \
 		php-zip \
-		php-cmath \
 		php-imagick \
 		php-redis \
 		curl \
