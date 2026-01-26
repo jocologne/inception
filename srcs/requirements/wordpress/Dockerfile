@@ -1,16 +1,16 @@
 FROM	debian:oldstable
 
 RUN	apt-get update && apt-get install -y --no-install-recommends \
-		php-fpm \
-		php-mysql \
-		php-curl \
-		php-gd \
-		php-intl \
-		php-mbstring \
-		php-xml \
-		php-zip \
-		php-imagick \
-		php-redis \
+		php8.2-fpm \
+		php8.2-mysql \
+		php8.2-curl \
+		php8.2-gd \
+		php8.2-intl \
+		php8.2-mbstring \
+		php8.2-xml \
+		php8.2-zip \
+		php8.2-imagick \
+		php8.2-redis \
 		curl \
 		mariadb-client \
 		ca-certificates \
@@ -27,7 +27,7 @@ RUN	mkdir -p /var/www/html \
 RUN	mkdir -p /run/php \
 		&& chown -R www-data:www-data /run/php
 
-COPY	conf/www.conf /etc/php/*/fpm/pool.d/www.conf
+COPY	conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
 COPY	tools/init.sh /usr/local/bin/init.sh
 RUN	chmod +x /usr/local/bin/init.sh

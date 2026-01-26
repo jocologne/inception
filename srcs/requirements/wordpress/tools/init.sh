@@ -125,4 +125,4 @@ chown -R www-data:www-data /var/www/html
 
 echo "[INFO] Iniciando PHP-FPM..."
 
-exec php-fpm -F
+exec php-fpm8.2 -F
