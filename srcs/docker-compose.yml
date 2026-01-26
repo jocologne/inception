@@ -1,4 +1,42 @@
 services:
+  wordpress:
+    build: .requirements/wordpress
+    dockerfile: Dockerfile
+    container_name: wordpress
+    image: wordpress
+    restart: unless-stopped
+    networks:
+      - inception
+    volumes:
+      -wordpress_data:/var/www/html
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD_FILE=/run/secrets/db_password
+      - WORDPRESS_TITLE=${WORDPRESS_TITLE}
+      - WORDPRESS_ADMIN_USER=${WORDPRESS_ADMIN_USER}
+      - WORDPRESS_ADMIN_EMAIL=${WORDPRESS_ADMIN_EMAIL}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORDPRESS_USER_EMAIL=${WORDPRESS_USER_EMAIL}
+      - WORDPRESS_USER_ROLE=&{WORDPRESS_USER_ROLE}
+      - REDIS_HOST=${REDIS_HOST:-}
+      - REDIS_PORT=${REDIS_PORT:-}
+    secrets:
+      - db_password
+      - credentials
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "pgrep", "php-fpm"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+
   mariadb:
     build:
       context: ./requirements/mariadb
@@ -30,6 +68,8 @@ secrets:
     file: ../secrets/db_password.txt
   db_root_password:
     file: ../secrets/db_root_password.txt
+  credentials:
+    file: ../secrets/credentials.txt
 
     
 volumes:
@@ -39,6 +79,12 @@ volumes:
       type: none
       o: bind
       device: /home/jcologne/data/mariadb
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jcologne/data/wordpress
 
 networks:
   inception:
