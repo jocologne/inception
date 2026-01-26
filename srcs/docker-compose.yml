@@ -21,7 +21,7 @@ services:
       - WORDPRESS_ADMIN_EMAIL=${WORDPRESS_ADMIN_EMAIL}
       - WORDPRESS_USER=${WORDPRESS_USER}
       - WORDPRESS_USER_EMAIL=${WORDPRESS_USER_EMAIL}
-      - WORDPRESS_USER_ROLE=&{WORDPRESS_USER_ROLE}
+      - WORDPRESS_USER_ROLE=${WORDPRESS_USER_ROLE}
       - REDIS_HOST=${REDIS_HOST:-}
       - REDIS_PORT=${REDIS_PORT:-}
     secrets:
@@ -58,7 +58,7 @@ services:
       - db_password
       - db_root_password
     healthcheck:
-      test: ["CMD", "mysqladmin", ping, "-h", "localhost", "--silent"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
       interval: 10s
       timeout: 5s
       retries: 5
