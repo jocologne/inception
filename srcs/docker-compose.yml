@@ -1,7 +1,8 @@
 services:
   wordpress:
-    build: .requirements/wordpress
-    dockerfile: Dockerfile
+    build:
+      context: .requirements/wordpress 
+      dockerfile: Dockerfile
     container_name: wordpress
     image: wordpress
     restart: unless-stopped
