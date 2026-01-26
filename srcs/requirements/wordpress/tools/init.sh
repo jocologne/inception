@@ -28,12 +28,11 @@ REQUIRED_VARS=(
 	"WORDPRESS_DB_HOST"
 	"WORDPRESS_DB_NAME"
 	"WORDPRESS_DB_USER"
-	"MYSQL_PASSWORD"
 	"DOMAIN_NAME"
 	"WORDPRESS_ADMIN_USER"
-	"ADMIN_PASSWORD"
 	"WORDPRESS_USER"
-	"USER_PASSWORD"
+	"WORDPRESS_ADMIN_EMAIL"
+	"WORDPRESS_USER_EMAIL"
 )
 
 for var in "${REQUIRED_VARS[@]}"; do
@@ -42,6 +41,10 @@ for var in "${REQUIRED_VARS[@]}"; do
 		exit 1
 	fi
 done
+
+[ -z "$DB_PASSWORD" ] && echo "[ERROR] DB_PASSWORD missing" && exit 1
+[ -z "$ADMIN_PASSWORD" ] && echo "[ERROR] ADMIN_PASSWORD missing" && exit 1
+[ -z "$USER_PASSWORD" ] && echo "[ERROR] USER_PASSWORD missing" && exit 1
 
 DB_HOST=$(echo "$WORDPRESS_DB_HOST" | cut -d':' -f1)
 DB_PORT=$(echo "$WORDPRESS_DB_HOST" | cut -d':' -f2)
