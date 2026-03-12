@@ -215,11 +215,4 @@ NGINX depends on WordPress being healthy, and WordPress depends on MariaDB being
 ## Network
 
 All containers connect to the `inception` bridge network. They communicate by service name (e.g., `wordpress:9000`, `mariadb:3306`). Only NGINX exposes a port to the host (`443:443`). The MariaDB and WordPress ports are internal only.
-
----
-
-## Known Issues
-
-- **Password leak in logs**: `wordpress/tools/init.sh` contains `echo "ADMIN__$ADMIN_PASSWORD"` which prints the admin password in plaintext to container logs. This line should be removed before production use or evaluation.
-
-- **`debian:oldstable` tag**: This tag is semantic and its meaning changes over time as new Debian releases are made. For reproducibility, consider pinning to a specific version like `debian:bullseye` (Debian 11, penultimate stable).
+gsend
