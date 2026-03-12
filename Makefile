@@ -3,8 +3,8 @@ DATA_PATH = /home/jcologne/data
 
 all:
 	@echo "Build mandatory"
-	@mkdir -p $(DATA_PATH)/wordpress
-	@mkdir -p $(DATA_PATH)/mariadb
+	@ sudo mkdir -p $(DATA_PATH)/wordpress
+	@ sudo mkdir -p $(DATA_PATH)/mariadb
 	@$(COMPOSE) up -d --build nginx wordpress mariadb
 
 bonus: all
