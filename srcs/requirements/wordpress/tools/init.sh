@@ -71,7 +71,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 	echo "[INFO] Primeira inicialização - Configurando WordPress..."
 	if [ ! -f "/var/www/html/wp-load.php" ]; then
 		echo "[INFO] Baixando WordPress..."
-		wp core download --allow-root --locale=pt_BR
+		wp core download --allow-root
 	fi
 	echo "[INFO] Criando wp-config.php..."
 	wp config create \
